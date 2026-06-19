@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bikram &amp; Shreejana — Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400&family=Marcellus&family=Pinyon+Script&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    /* ceremonial Nepali wedding palette: bridal red + gold on ivory */
+    --green:#a31621;        /* primary ceremonial red */
+    --green-deep:#5e0b10;   /* deep maroon-red */
+    --gold:#c19a3e;
+    --gold-soft:#ecca72;
+    --ivory:#fbf3e6;
+    --ivory-2:#f4e7cf;
+    --ink:#3d2b22;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Cormorant',serif;background:var(--green-deep);color:var(--ink);overflow-x:hidden}
+  .deva{font-family:'Tiro Devanagari Sanskrit',serif}
+  .script{font-family:'Pinyon Script',cursive}
+  .serif{font-family:'Marcellus',serif}
+
+  /* ---------- shared svg ornaments ---------- */
+  .orn{display:block}
+  .lotus{width:96px;height:40px;color:var(--gold)}
+  .lotus-lg{width:150px;height:62px}
+
+  /* ---------- page bg ---------- */
+  .page{position:relative;background:
+      radial-gradient(circle at 50% 0%, rgba(191,154,74,.14), transparent 42%),
+      linear-gradient(180deg,var(--ivory) 0%, var(--ivory-2) 100%)}
+  .page::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:radial-gradient(rgba(94,11,16,.05) 1px,transparent 1px);background-size:26px 26px}
+  section{position:relative;z-index:1;padding:74px 22px;text-align:center}
+
+  /* ---------- cover ---------- */
+  #cover{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;
+      padding:26px;color:var(--ivory);text-align:center;
+      background:radial-gradient(circle at 50% 35%, #c0202c 0%, var(--green) 45%, var(--green-deep) 100%);
+      transition:opacity 1.1s ease, visibility 1.1s ease}
+  #cover.hide{opacity:0;visibility:hidden}
+  .mandala{position:absolute;width:min(120vw,820px);height:min(120vw,820px);opacity:.16;color:var(--gold-soft);
+      animation:spin 80s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .cover-card{position:relative;max-width:540px;width:100%;padding:54px 30px;
+      border:1px solid rgba(227,200,125,.4);border-radius:4px;
+      box-shadow:0 0 0 7px rgba(227,200,125,.05), inset 0 0 60px rgba(0,0,0,.28)}
+  .vine{position:absolute;width:64px;height:64px;color:var(--gold-soft);opacity:.85}
+  .vine.tl{top:-2px;left:-2px}
+  .vine.tr{top:-2px;right:-2px;transform:scaleX(-1)}
+  .vine.bl{bottom:-2px;left:-2px;transform:scaleY(-1)}
+  .vine.br{bottom:-2px;right:-2px;transform:scale(-1,-1)}
+  .diya{width:58px;height:58px;margin:0 auto 6px;color:var(--gold-soft);filter:drop-shadow(0 0 14px rgba(227,200,125,.55))}
+  .cover-bless{font-size:1.05rem;letter-spacing:1px;color:var(--gold-soft)}
+  .cover-sub{letter-spacing:6px;font-size:.74rem;text-transform:uppercase;color:rgba(246,239,225,.75);margin-top:22px}
+  .cover-names{font-family:'Marcellus',serif;font-size:3.1rem;line-height:1.15;color:#fff;margin:10px 0;letter-spacing:1px;text-shadow:0 4px 26px rgba(0,0,0,.4)}
+  .amp{display:block;font-family:'Pinyon Script',cursive;font-size:2.1rem;color:var(--gold-soft);margin:4px 0;text-transform:lowercase}
+  .enter{margin-top:30px;display:inline-flex;align-items:center;gap:10px;cursor:pointer;background:transparent;
+      border:1px solid var(--gold-soft);color:var(--gold-soft);font-family:'Marcellus',serif;font-size:.82rem;
+      letter-spacing:4px;text-transform:uppercase;padding:13px 34px;border-radius:40px;transition:.35s}
+  .enter:hover{background:var(--gold-soft);color:var(--green-deep);box-shadow:0 0 26px rgba(227,200,125,.5)}
+  .enter svg{width:16px;height:16px}
+
+  /* ---------- headings / dividers ---------- */
+  .eyebrow{letter-spacing:6px;text-transform:uppercase;font-size:.72rem;color:var(--gold);font-weight:600}
+  h2{font-family:'Marcellus',serif;font-size:2.5rem;color:var(--green);font-weight:400;margin:10px 0;letter-spacing:.5px}
+  .divider{margin:18px auto;color:var(--gold)}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 1s ease, transform 1s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- hero ---------- */
+  #hero{padding-top:96px}
+  #hero .names{font-family:'Marcellus',serif;font-size:2.9rem;color:var(--green);letter-spacing:1px}
+  #hero .deva{font-size:1.4rem;color:var(--gold);margin-top:6px}
+  #hero .invite{font-size:1.32rem;color:var(--green);line-height:2;max-width:600px;margin:20px auto 0}
+  #hero p.lead{font-size:1.25rem;opacity:.82;margin-top:10px}
+  .bless-head{font-size:1.2rem;letter-spacing:1px;color:var(--gold);margin-bottom:6px}
+
+  /* ---------- blessing ---------- */
+  #blessing .verse{font-size:1.55rem;color:var(--green);line-height:2.1;margin:20px auto;max-width:680px}
+  #blessing .trans{font-style:italic;color:var(--ink);max-width:560px;margin:0 auto;font-size:1.15rem;opacity:.82}
+
+  /* ---------- couple ---------- */
+  .couple{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:34px;margin-top:34px}
+  .person{max-width:300px}
+  .pf{position:relative;width:240px;height:300px;margin:0 auto;padding:9px}
+  .pf::before{content:"";position:absolute;inset:0;border:2px solid var(--gold);
+      border-radius:50% 50% 50% 50%/62% 62% 38% 38%}
+  .pf-inner{width:100%;height:100%;overflow:hidden;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;
+      box-shadow:0 16px 40px rgba(94,11,16,.28)}
+  .pf-inner img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s ease}
+  .pf:hover img{transform:scale(1.07)}
+  .person h3{font-family:'Marcellus',serif;font-size:1.9rem;color:var(--green);margin-top:20px;font-weight:400}
+  .person .role{display:inline-block;letter-spacing:3px;text-transform:uppercase;font-size:.82rem;color:var(--green);font-weight:600;padding-bottom:4px;border-bottom:1px solid var(--gold);margin-bottom:2px}
+  .person .fam{font-size:1.05rem;opacity:.72;margin-top:6px}
+  .rings{width:74px;height:50px;color:var(--gold);align-self:center;animation:float 3s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+  /* ---------- mantra ---------- */
+  #mantra{background:linear-gradient(160deg,var(--green) 0%,var(--green-deep) 100%);color:var(--ivory)}
+  #mantra h2{color:var(--gold-soft)}
+  #mantra .eyebrow,#mantra .divider{color:var(--gold-soft)}
+  #mantra .verse{font-size:1.42rem;color:#fff;line-height:2.2;max-width:680px;margin:20px auto}
+  #mantra .trans{font-style:italic;opacity:.8;max-width:560px;margin:0 auto}
+
+  /* ---------- countdown ---------- */
+  .count{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:30px}
+  .cbox{position:relative;background:#fff;border-radius:12px;min-width:92px;padding:20px 12px;
+      box-shadow:0 10px 26px rgba(94,11,16,.12)}
+  .cbox::after{content:"";position:absolute;inset:5px;border:1px solid rgba(191,154,74,.5);border-radius:8px;pointer-events:none}
+  .cbox .num{font-family:'Marcellus',serif;font-size:2.5rem;color:var(--green);line-height:1}
+  .cbox .lbl{letter-spacing:2px;text-transform:uppercase;font-size:.64rem;color:var(--gold);margin-top:6px}
+
+  /* ---------- event ---------- */
+  .event{position:relative;background:#fff;border-radius:16px;max-width:430px;margin:30px auto 0;
+      padding:42px 30px;box-shadow:0 16px 40px rgba(94,11,16,.14)}
+  .event::after{content:"";position:absolute;inset:9px;border:1px solid rgba(191,154,74,.45);border-radius:10px;pointer-events:none}
+  .event .lamp{width:46px;height:46px;color:var(--gold);margin:0 auto 8px}
+  .event h3{font-family:'Marcellus',serif;font-size:1.7rem;color:var(--green);font-weight:400;margin-bottom:10px}
+  .event .np{font-size:1.3rem;color:var(--green);margin-bottom:2px}
+  .event .when{font-size:1.15rem;color:var(--ink);font-weight:500}
+  .event .where{font-size:1.1rem;opacity:.82;margin-top:12px;line-height:1.5}
+  .event a{display:inline-flex;align-items:center;gap:7px;margin-top:18px;color:var(--green);
+      border-bottom:1px solid var(--gold);text-decoration:none;font-family:'Marcellus',serif;font-size:.95rem;letter-spacing:1px;padding-bottom:2px}
+  .event a svg{width:15px;height:15px}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--green-deep);color:var(--gold-soft);text-align:center;padding:64px 22px 50px;position:relative;z-index:1}
+  footer .lotus{color:var(--gold-soft);margin:0 auto}
+  footer .thanks{font-family:'Tiro Devanagari Sanskrit',serif;font-size:1.3rem;color:#fff;margin:16px 0 4px}
+  footer .msg{font-size:1.15rem;max-width:520px;margin:0 auto;opacity:.85}
+  footer .sign{font-family:'Pinyon Script',cursive;font-size:2.4rem;color:#fff;margin-top:26px}
+
+  /* ---------- music ---------- */
+  #music{position:fixed;bottom:18px;right:18px;z-index:70;width:50px;height:50px;border-radius:50%;
+      border:1px solid var(--gold);background:var(--green);color:var(--gold-soft);cursor:pointer;
+      box-shadow:0 6px 18px rgba(0,0,0,.3);display:none;align-items:center;justify-content:center}
+  #music svg{width:20px;height:20px}
+  #music.spin{animation:spin 5s linear infinite}
+
+  @media(max-width:600px){
+    section{padding:56px 18px}
+    .cover-card{padding:44px 22px}
+    .cover-names{font-size:2.9rem}
+    .cover-sub{letter-spacing:4px}
+    h2{font-size:2rem}
+    #hero{padding-top:72px}
+    #hero .names{font-size:2.6rem}
+    #blessing .verse,#mantra .verse{font-size:1.25rem;line-height:1.95}
+    .trans{font-size:1.05rem}
+    .pf{width:230px;height:290px}
+    .rings{animation:none;transform:rotate(90deg)}   /* point down between stacked photos */
+    .couple{gap:18px}
+    .count{gap:11px}
+    .cbox{min-width:0;width:calc(50% - 6px);padding:16px 8px}   /* 2 x 2 grid */
+    .cbox .num{font-size:2.1rem}
+    .event{padding:36px 22px}
+    .vine{width:52px;height:52px}
+  }
+  @media(max-width:360px){
+    .cover-names{font-size:2.4rem}
+    #hero .names{font-size:2.2rem}
+    .cbox .num{font-size:1.8rem}
+  }
+  @media(hover:none){
+    .pf:hover img{transform:none}   /* no awkward zoom stuck on touch */
+  }
+</style>
+</head>
+<body>
+
+<!-- reusable SVG symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- lotus -->
+    <symbol id="ic-lotus" viewBox="0 0 120 50">
+      <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <path d="M2 44 H44"/><path d="M118 44 H76"/>
+        <path d="M60 44 C60 30 60 20 60 8 C66 20 66 32 60 44"/>
+        <path d="M60 44 C50 32 44 24 38 14 C50 22 58 32 60 44"/>
+        <path d="M60 44 C70 32 76 24 82 14 C70 22 62 32 60 44"/>
+        <path d="M60 44 C44 36 32 32 20 28 C34 30 50 36 60 44"/>
+        <path d="M60 44 C76 36 88 32 100 28 C86 30 70 36 60 44"/>
+        <circle cx="60" cy="44" r="2.4" fill="currentColor" stroke="none"/>
+      </g>
+    </symbol>
+    <!-- mandala -->
+    <symbol id="ic-mandala" viewBox="0 0 200 200">
+      <g fill="none" stroke="currentColor" stroke-width="1">
+        <circle cx="100" cy="100" r="96"/>
+        <circle cx="100" cy="100" r="78" stroke-dasharray="2 6"/>
+        <circle cx="100" cy="100" r="48"/>
+        <circle cx="100" cy="100" r="26"/>
+        <g>
+          <ellipse cx="100" cy="40" rx="9" ry="26"/>
+          <ellipse cx="100" cy="40" rx="9" ry="26" transform="rotate(30 100 100)"/>
+          <ellipse cx="100" cy="40" rx="9" ry="26" transform="rotate(60 100 100)"/>
+          <ellipse cx="100" cy="40" rx="9" ry="26" transform="rotate(90 100 100)"/>
+          <ellipse cx="100" cy="40" rx="9" ry="26" transform="rotate(120 100 100)"/>
+          <ellipse cx="100" cy="40" rx="9" ry="26" transform="rotate(150 100 100)"/>
+          <ellipse cx="100" cy="40" rx="9" ry="26" transform="rotate(180 100 100)"/>
+          <ellipse cx="100" cy="40" rx="9" ry="26" transform="rotate(210 100 100)"/>
+          <ellipse cx="100" cy="40" rx="9" ry="26" transform="rotate(240 100 100)"/>
+          <ellipse cx="100" cy="40" rx="9" ry="26" transform="rotate(270 100 100)"/>
+          <ellipse cx="100" cy="40" rx="9" ry="26" transform="rotate(300 100 100)"/>
+          <ellipse cx="100" cy="40" rx="9" ry="26" transform="rotate(330 100 100)"/>
+        </g>
+      </g>
+    </symbol>
+    <!-- vine corner -->
+    <symbol id="ic-vine" viewBox="0 0 64 64">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+        <path d="M4 4 H30"/><path d="M4 4 V30"/>
+        <path d="M4 4 C26 6 34 18 30 36 C28 26 20 20 10 20"/>
+        <circle cx="32" cy="40" r="2.4" fill="currentColor" stroke="none"/>
+        <path d="M30 36 C40 34 46 26 46 14"/>
+        <circle cx="46" cy="12" r="2" fill="currentColor" stroke="none"/>
+      </g>
+    </symbol>
+    <!-- diya lamp -->
+    <symbol id="ic-diya" viewBox="0 0 64 64">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 38 C14 50 26 54 32 54 C38 54 50 50 50 38 Z"/>
+        <path d="M50 38 C44 36 38 36 32 36 C26 36 20 36 14 38"/>
+        <path d="M32 36 C30 30 36 28 34 22"/>
+        <path d="M34 22 C30 16 33 8 32 4 C31 8 34 16 30 22 C28 26 34 28 34 22Z" fill="currentColor" stroke="none"/>
+      </g>
+    </symbol>
+    <!-- interlocking rings -->
+    <symbol id="ic-rings" viewBox="0 0 90 56">
+      <g fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="34" cy="30" r="18"/>
+        <circle cx="56" cy="30" r="18"/>
+        <path d="M45 14 l3 -7 l3 7" fill="currentColor" stroke="none"/>
+      </g>
+    </symbol>
+    <!-- pin -->
+    <symbol id="ic-pin" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21 C12 21 19 14 19 9 A7 7 0 0 0 5 9 C5 14 12 21 12 21Z"/>
+        <circle cx="12" cy="9" r="2.4"/>
+      </g>
+    </symbol>
+    <!-- note -->
+    <symbol id="ic-note" viewBox="0 0 24 24">
+      <g fill="currentColor"><path d="M9 17V5l10-2v12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="6.5" cy="17.5" r="2.6"/><circle cx="16.5" cy="15.5" r="2.6"/></g>
+    </symbol>
+    <!-- arrow -->
+    <symbol id="ic-arrow" viewBox="0 0 24 24">
+      <path d="M4 12 H20 M14 6 l6 6 l-6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ COVER ============ -->
+<div id="cover">
+  <svg class="mandala"><use href="#ic-mandala"/></svg>
+  <div class="cover-card">
+    <svg class="vine tl"><use href="#ic-vine"/></svg>
+    <svg class="vine tr"><use href="#ic-vine"/></svg>
+    <svg class="vine bl"><use href="#ic-vine"/></svg>
+    <svg class="vine br"><use href="#ic-vine"/></svg>
+    <svg class="diya"><use href="#ic-diya"/></svg>
+    <div class="cover-bless deva">॥ श्री गणेशाय नमः ॥</div>
+    <div class="cover-sub">Two souls, one journey</div>
+    <div class="cover-names script">Bikram<span class="amp serif">and</span>Shreejana</div>
+    <div class="deva" style="color:var(--gold-soft);font-size:1.15rem;margin-top:4px">॥ शुभ विवाह ॥</div>
+    <button class="enter" onclick="enter()">Open Invitation <svg><use href="#ic-arrow"/></svg></button>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- HERO -->
+  <section id="hero">
+    <svg class="orn lotus lotus-lg reveal" style="margin:0 auto"><use href="#ic-lotus"/></svg>
+    <p class="eyebrow reveal" style="margin-top:14px">Together with their families</p>
+    <h2 class="names reveal serif">Bikram &amp; Shreejana</h2>
+    <p class="deva reveal">शुभ विवाह — Subha Bibaha</p>
+    <p class="invite deva reveal">हाम्रो जीवनको नयाँ यात्रामा तपाईंको स्नेह,<br/>शुभकामना र उपस्थितिको हार्दिक अपेक्षा गर्दछौं।</p>
+    <p class="lead reveal">request the honour of your presence</p>
+  </section>
+
+  <!-- BLESSING -->
+  <section id="blessing">
+    <svg class="diya" style="color:var(--gold)"><use href="#ic-diya"/></svg>
+    <p class="eyebrow reveal">A Divine Blessing</p>
+    <h2 class="reveal">Ganesh Vandana</h2>
+    <svg class="orn lotus divider reveal"><use href="#ic-lotus"/></svg>
+    <p class="bless-head deva reveal">॥ श्री गणेशाय नमः ॥</p>
+    <p class="verse deva reveal">वक्रतुण्ड महाकाय<br/>सूर्यकोटि समप्रभ।<br/>निर्विघ्नं कुरु मे देव<br/>सर्वकार्येषु सर्वदा॥</p>
+    <p class="trans reveal">Salutations to Lord Ganesha, radiant as a million suns — may every undertaking be free of obstacles, always.</p>
+  </section>
+
+  <!-- COUPLE -->
+  <section id="couple">
+    <p class="eyebrow reveal">The Groom &amp; The Bride</p>
+    <h2 class="reveal">With Love &amp; Blessings</h2>
+    <svg class="orn lotus divider reveal"><use href="#ic-lotus"/></svg>
+    <div class="couple">
+      <div class="person reveal">
+        <div class="pf"><div class="pf-inner"><img src="groom.jpg" alt="Bikram Ghimire" /></div></div>
+        <p class="role">The Groom</p>
+        <h3>Bikram Ghimire</h3>
+        <p class="fam">The Ghimire Family</p>
+      </div>
+      <svg class="rings reveal"><use href="#ic-rings"/></svg>
+      <div class="person reveal">
+        <div class="pf"><div class="pf-inner"><img src="bride.jpg" alt="Shreejana Pudasaini" /></div></div>
+        <p class="role">The Bride</p>
+        <h3>Shreejana Pudasaini</h3>
+        <p class="fam">The Pudasaini Family</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANTRA -->
+  <section id="mantra">
+    <p class="eyebrow reveal">Mangal Mantra</p>
+    <h2 class="deva reveal">मङ्गलम्</h2>
+    <svg class="orn lotus divider reveal"><use href="#ic-lotus"/></svg>
+    <p class="bless-head deva reveal" style="color:var(--gold-soft)">॥ ॐ मङ्गलाय नमः ॥</p>
+    <p class="verse deva reveal">मङ्गलं भगवान् विष्णुः<br/>मङ्गलं गरुडध्वजः।<br/>मङ्गलं पुण्डरीकाक्षः<br/>मङ्गलायतनो हरिः॥</p>
+    <p class="trans reveal">May Lord Vishnu, the lotus-eyed abode of all auspiciousness, bless this union with lasting joy.</p>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section id="countdown">
+    <p class="eyebrow reveal">Counting down to forever</p>
+    <h2 class="reveal">The Big Day</h2>
+    <svg class="orn lotus divider reveal"><use href="#ic-lotus"/></svg>
+    <div class="count reveal">
+      <div class="cbox"><div class="num" id="d">00</div><div class="lbl">Days</div></div>
+      <div class="cbox"><div class="num" id="h">00</div><div class="lbl">Hours</div></div>
+      <div class="cbox"><div class="num" id="m">00</div><div class="lbl">Minutes</div></div>
+      <div class="cbox"><div class="num" id="s">00</div><div class="lbl">Seconds</div></div>
+    </div>
+  </section>
+
+  <!-- EVENT -->
+  <section id="events">
+    <p class="eyebrow reveal">Save the date</p>
+    <h2 class="reveal">Wedding Ceremony</h2>
+    <svg class="orn lotus divider reveal"><use href="#ic-lotus"/></svg>
+    <div class="event reveal">
+      <svg class="lamp"><use href="#ic-diya"/></svg>
+      <h3>Subha Bibaha</h3>
+      <p class="np deva">९ आषाढ २०८३</p>
+      <p class="when">Tuesday, 23 June 2026</p>
+      <p class="where"><strong>Ganesh Party Palace</strong><br/>Hetauda-5, Sanupokhara</p>
+      <a href="https://www.google.com/maps/search/Ganesh+Party+Palace+Hetauda+Sanupokhara" target="_blank" rel="noopener">
+        <svg><use href="#ic-pin"/></svg> View on Map
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <svg class="orn lotus"><use href="#ic-lotus"/></svg>
+  <p class="thanks">॥ धन्यवाद ॥</p>
+  <p class="msg">Your presence and blessings would make our special day complete.</p>
+  <p class="sign">Bikram &amp; Shreejana</p>
+</footer>
+
+<button id="music" title="Play / pause music"><svg><use href="#ic-note"/></svg></button>
+
+<script>
+  function enter(){
+    document.getElementById('cover').classList.add('hide');
+    document.body.style.overflow='auto';
+    const mb=document.getElementById('music'); mb.style.display='flex';
+    if(window._audio){ window._audio.play().then(()=>mb.classList.add('spin')).catch(()=>{}); }
+  }
+  document.body.style.overflow='hidden';
+
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Wedding date — 9 Aashad 2083 BS ≈ 23 June 2026 (Nepal time)
+  const WEDDING=new Date('2026-06-23T11:00:00+05:45').getTime();
+  function tick(){
+    const diff=WEDDING-Date.now();
+    const set=(id,v)=>document.getElementById(id).textContent=String(Math.max(0,v)).padStart(2,'0');
+    if(diff<=0){set('d',0);set('h',0);set('m',0);set('s',0);return;}
+    set('d',Math.floor(diff/864e5));set('h',Math.floor(diff%864e5/36e5));
+    set('m',Math.floor(diff%36e5/6e4));set('s',Math.floor(diff%6e4/1e3));
+  }
+  tick();setInterval(tick,1000);
+
+  // Optional: drop a "music.mp3" in this folder to enable background music
+  (function(){
+    const a=new Audio('music.mp3');a.loop=true;a.volume=.5;window._audio=a;
+    const mb=document.getElementById('music');
+    mb.addEventListener('click',()=>{
+      if(a.paused){a.play().then(()=>mb.classList.add('spin')).catch(()=>{});}
+      else{a.pause();mb.classList.remove('spin');}
+    });
+  })();
+</script>
+</body>
+</html>
